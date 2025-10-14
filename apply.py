@@ -25,7 +25,7 @@ lineNew2 = '# bind = Ctrl+Super, S, togglespecialworkspace, # [hidden] -- Overri
 
 lineAppendKeybinds = '''
 ##! citr0mods
-bind = Super, S, togglespecialworkspace, spotify
+bind = Super, S, togglespecialworkspace, Spotify
 bind = Super, D, togglespecialworkspace, vesktop
 '''
 
@@ -36,7 +36,7 @@ workspace = special:vesktop, gapsout:30, on-startup:hide
 exec-once = vesktop
 
 ## Spotify
-windowrulev2 = workspace special:spotify, class:^(Sspotify)$
+windowrulev2 = workspace special:spotify, class:^(spotify)$
 workspace = special:spotify, gapsout:30, on-startup:hide
 exec-once = spotify
 '''
