@@ -4,3 +4,10 @@ A modification to [end-4 dotfiles](https://github.com/end-4/dots-hyprland/) that
 
 > [!IMPORTANT]
 > Yes, I know I used python for this. I am currently learning python and need the experience.
+
+
+## Instalation:
+Run apply.py to install. You must be on end-4 to sucessfully install.
+
+> [!TIP]
+> You may need to restart hyprland (log off and on again) so the applications get their own workspaces.
