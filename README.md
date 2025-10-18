@@ -18,6 +18,8 @@ Run apply.py to install. You must be on end-4 to sucessfully install.
 > [!TIP]
 > If you are not reinstalling, you will need to hit `y` for restarting!
 
+## Limitations
+If you are reinstalling, you will need to remove the previous citr0mods entry in the custom keybinds configuration.
 
 #### Join the net:
 <a href="https://discord.gg/KVkjjswV2u"><img src="https://img.shields.io/badge/-Discord-5865F2?style=flat&logo=discord&logoColor=fff" width="200" alt="discord logo"/> </a>
