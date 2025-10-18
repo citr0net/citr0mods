@@ -12,6 +12,7 @@ downloadedFilesDir = userHomeDir+'Downloads/downloadedFiles'
 keybindsConf = hyprlandDir+'/hyprland/keybinds.conf'
 keybindsCustomConf = hyprlandDir+'/custom/keybinds.conf'
 citr0modsPath = hyprlandDir+'/citr0_end4_mods'
+hypridleConf = hyprlandDir+'/hypridle.conf'
 
 ALREADY_INSTALLED = False
 
@@ -62,6 +63,21 @@ lineNew1 = '# bind = Super, S, togglespecialworkspace, # Toggle scratchpad -- Ov
 
 lineOriginal2 = 'bind = Ctrl+Super, S, togglespecialworkspace, # [hidden]'
 lineNew2 = '# bind = Ctrl+Super, S, togglespecialworkspace, # [hidden] -- Overritten by citr0_mods'
+
+## For disabling sleep
+lineOriginal3 = '''
+listener {
+    timeout = 900 # 15mins
+    on-timeout = $suspend_cmd
+}
+'''
+
+lineNew3 = '''
+#listener {
+#    timeout = 900 # 15mins
+#    on-timeout = $suspend_cmd
+#}
+'''
 
 # For adding a new section to Super+/
 
@@ -149,7 +165,7 @@ def rewriteStock():
                 if original in line:
                     line = line.replace(original, new)
             print(line, end='')
-    print('Files Overwritten!')
+    print('Keybind Files Overwritten!')
 
 def appendNewInformation():
     with open(keybindsCustomConf, 'a') as file:
@@ -169,11 +185,24 @@ def restartFunction():
 
 def mouseAccelerationModificaiton():
     checkerTmp = input('Would you like to disable mouse acceleration as well (Y/n): ')
-    if checkerTmp != n:
-        with open(citr0modsPath+'/speicalWindows.conf', 'a') as file:
-            file.write('\n')
+    if checkerTmp != 'n':
+        with open(citr0modsPath+'/specialWindows.conf', 'a') as file:
             file.write(inputModification)
 
+def rewriteHypride():
+    checkerTmp = input('Would you like to disable sleep mode (y/N): ')
+    if checkerTmp != 'y':
+        return
+    else:
+        with open(hypridleConf, 'r+') as file:
+            content = file.read()
+            content = content.replace(lineOriginal3.strip(), lineNew3.strip())
+            file.seek(0)
+            file.write(content)
+            file.truncate()
+
+    
+        print('Hypride Files Overwritten!')
 
 addUserDiscordAndBase()
 addSpotify()
@@ -181,5 +210,6 @@ rewriteStock()
 if ALREADY_INSTALLED == False:
     appendNewInformation()
 mouseAccelerationModificaiton()
+rewriteHypride()
 restartFunction()
 print(ALREADY_INSTALLED)
