@@ -6,6 +6,14 @@ labels: ''
 assignees: ''
 ---
 
+### Issue Checklist
+
+Please make sure to check the following before submitting your issue:
+
+- [ ] I am on the most recent version of **citr0mods**
+- [ ] I am on the most recent version of the **end-4 dot files**
+- [ ] I give permission for contributors to create issues relating to this issue
+
 **Describe the bug**
 A clear and concise description of what the bug is.
 
