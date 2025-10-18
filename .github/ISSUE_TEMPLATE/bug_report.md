@@ -4,6 +4,8 @@ about: Create a report to help us improve
 title: "[BUG] "
 labels: ''
 assignees: ''
+---
+
 body:
   - type: markdown
   - type: checkboxes
@@ -20,7 +22,6 @@ body:
         - label: I give person to have the user citr0net create an issue under end-4 on my behalf
           required: true # Obviously
 
----
 
 **Describe the bug**
 A clear and concise description of what the bug is.
