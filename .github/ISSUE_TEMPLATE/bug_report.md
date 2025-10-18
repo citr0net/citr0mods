@@ -5,8 +5,6 @@ title: "[BUG] "
 labels: ''
 assignees: ''
 
----
-
   - type: checkboxes
     attributes:
       label: "Step 1. Before you submit"
@@ -20,6 +18,8 @@ assignees: ''
           required: false # Not required cuz user may have failed to do so
         - label: I give person to have the user citr0net create an issue under end-4 on my behalf
           required: true # Obviously
+
+---
 
 **Describe the bug**
 A clear and concise description of what the bug is.
