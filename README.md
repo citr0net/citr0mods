@@ -1,5 +1,5 @@
 # citr0mods
-> [!INFO]
+> [!NOTE]
 > The current version is v3.2
 
 A modification to [end-4 dotfiles](https://github.com/end-4/dots-hyprland/) that gives some special keybinds to the user. The script also disables mouse acceleration (if you want) The script fully handles modifying the hyprland configurations and adding entries to the keybinds screen.
@@ -16,10 +16,7 @@ A modification to [end-4 dotfiles](https://github.com/end-4/dots-hyprland/) that
 Run apply.py to install. You must be on end-4 to sucessfully install.
 
 > [!TIP]
-> You may need to restart hyprland (log off and on again) so the applications get their own workspaces, hyprland will not automanically do that for you.
-
-> [!NOTE]
-> If you installed spotify through pacman (aka spotify-launcher). You will need to modify the specialWindows.conf to say spotify-launcher instead of spotify in all instances. I will add this functionality later.
+> If you are not reinstalling, you will need to hit `y` for restarting!
 
 
 #### Join the net:
