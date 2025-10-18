@@ -13,6 +13,48 @@ keybindsConf = hyprlandDir+'/hyprland/keybinds.conf'
 keybindsCustomConf = hyprlandDir+'/custom/keybinds.conf'
 citr0modsPath = hyprlandDir+'/citr0_end4_mods'
 
+ALREADY_INSTALLED = False
+
+def printTitle():
+    print()
+    print('''
+      _ _         ___                      _              _           _        _ _           
+  ___(_) |_ _ __ / _ \ _ __ ___   ___   __| |___         (_)_ __  ___| |_ __ _| | | ___ _ __ 
+ / __| | __| '__| | | | '_ ` _ \ / _ \ / _` / __|        | | '_ \/ __| __/ _` | | |/ _ \ '__|
+| (__| | |_| |  | |_| | | | | | | (_) | (_| \__ \        | | | | \__ \ || (_| | | |  __/ |   
+ \___|_|\__|_|   \___/|_| |_| |_|\___/ \__,_|___/        |_|_| |_|___/\__\__,_|_|_|\___|_|   
+                                                                                                                                                
+    ''')
+    print()
+
+citr0modsText = '''
+#          _ _         ___                      _     
+#      ___(_) |_ _ __ / _ \\ _ __ ___   ___   __| |___ 
+#     / __| | __| '__| | | | '_ ` _ \\ / _ \\ / _` / __|
+#    | (__| | |_| |  | |_| | | | | | | (_) | (_| \\__ \\
+#     \\___|_|\\__|_|   \\___/|_| |_| |_|\\___/ \\__,_|___/
+#    
+'''
+
+def getDiscordClientChoice():
+    isValidChoice = 0
+    printTitle()
+    while isValidChoice == 0:
+        optionDiscordClient = int(input('''
+What do you have installed:
+1: Discord
+2: Vesktop
+
+Please type the coresponding number: '''))
+        if optionDiscordClient == 1:
+            return 'Discord_clientTypeDiscord'
+            isValidChoice == 1
+        elif optionDiscordClient == 2:
+            return 'Vesktop_clientTypeDiscord'
+            isValidChoice = 1
+        else:
+            isValidChoice = 0
+
 ## For disabling the existing, conflicting keybinds
 
 lineOriginal1 = 'bind = Super, S, togglespecialworkspace, # Toggle scratchpad'
@@ -26,15 +68,24 @@ lineNew2 = '# bind = Ctrl+Super, S, togglespecialworkspace, # [hidden] -- Overri
 lineAppendKeybinds = '''
 ##! citr0mods
 bind = Super, S, togglespecialworkspace, Spotify
-bind = Super, D, togglespecialworkspace, vesktop
+bind = Super, D, togglespecialworkspace, discord
 '''
 
-citr0modsBase = '''
-## Vesktop (Discord Client)
-windowrulev2 = workspace special:vesktop, class:^(vesktop)$
-workspace = special:vesktop, gapsout:30, on-startup:hide
-exec-once = vesktop
+discordClient = '''
+## Discord (Discord Client)
+windowrulev2 = workspace special:discord, class:^(discord)$
+workspace = special:discord, gapsout:30, on-startup:hide
+exec-once = discord
+'''
 
+vesktopClient = '''
+## Vesktop (Discord Client)
+windowrulev2 = workspace special:discord, class:^(vesktop)$
+workspace = special:discord, gapsout:30, on-startup:hide
+exec-once = vesktop
+'''
+
+spotifyClient = '''
 ## Spotify
 windowrulev2 = workspace special:spotify, class:^(spotify)$
 workspace = special:spotify, gapsout:30, on-startup:hide
@@ -52,7 +103,32 @@ def checkEnd4():
         print('Reason: the config file does not exist')
         input('Press enter to continue...')
         quit()
-    return compatibility
+
+def addUserDiscordAndBase():
+    global ALREADY_INSTALLED
+    if os.path.exists(citr0modsPath):
+        print('citr0mods already installed, updating')
+        os.system('rm -rf '+citr0modsPath)
+
+        ALREADY_INSTALLED = True
+
+        os.makedirs(citr0modsPath, exist_ok=True)
+    
+    choice = getDiscordClientChoice()
+    os.makedirs(citr0modsPath, exist_ok=True)
+    with open(citr0modsPath+'/specialWindows.conf', 'w') as file:
+        file.write(citr0modsText)
+        print('\n')
+        print('\n')
+        if choice == 'Discord_clientTypeDiscord':
+           file.write(discordClient)
+        if choice == 'Vesktop_clientTypeDiscord':
+            file.write(vesktopClient)
+
+def addSpotify():
+    with open(citr0modsPath+'/specialWindows.conf', 'a') as file :
+        print('\n')
+        file.write(spotifyClient)
 
 def rewriteStock():
     replacements = {
@@ -76,11 +152,19 @@ def appendNewInformation():
         file.write('source=citr0_end4_mods/specialWindows.conf')
     print('New Information added')
 
-def addBase():
-    os.makedirs(citr0modsPath, exist_ok=True)
-    with open(citr0modsPath+'/specialWindows.conf', 'w') as file:
-        file.write(citr0modsBase)
+def restartFunction():
+    restart = input('Would you like to restart now? (y/N): ')
+    if restart == 'y':
+        os.system('reboot')
+    else:
+        print('Enjoy your mods :) -citr0')
 
+
+
+addUserDiscordAndBase()
+addSpotify()
 rewriteStock()
-appendNewInformation()
-addBase()
+if ALREADY_INSTALLED == False:
+    appendNewInformation()
+restartFunction()
+print(ALREADY_INSTALLED)
