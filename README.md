@@ -1,6 +1,6 @@
 # citr0mods
 > [!NOTE]
-> The current version is v3.2
+> The current version is v3.3.1
 
 A modification to [end-4 dotfiles](https://github.com/end-4/dots-hyprland/) that modifies end-4 in a favorable way. The script fully handles modifying the hyprland configurations and adding entries to the keybinds screen.
 
