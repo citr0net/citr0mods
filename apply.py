@@ -92,6 +92,14 @@ workspace = special:spotify, gapsout:30, on-startup:hide
 exec-once = spotify
 '''
 
+inputModification = '''
+## Removes mouse accelerated
+input {
+  sensitivity = 0
+  accel_profile = flat
+}
+'''
+
 def checkEnd4():
     checkerTmp = subprocess.run(['cat', '/home/'+username+'/.config/illogical-impulse/config.json'], capture_output=True)
     if checkerTmp != 'cat: /home/'+username+'/.config/illogical-impulse: No such file or directory':
@@ -159,6 +167,12 @@ def restartFunction():
     else:
         print('Enjoy your mods :) -citr0')
 
+def mouseAccelerationModificaiton():
+    checkerTmp = input('Would you like to disable mouse acceleration as well (Y/n): ')
+    if checkerTmp != n:
+        with open(citr0modsPath+'/speicalWindows.conf', 'a') as file:
+            file.write('\n')
+            file.write(inputModification)
 
 
 addUserDiscordAndBase()
@@ -166,5 +180,6 @@ addSpotify()
 rewriteStock()
 if ALREADY_INSTALLED == False:
     appendNewInformation()
+mouseAccelerationModificaiton()
 restartFunction()
 print(ALREADY_INSTALLED)
