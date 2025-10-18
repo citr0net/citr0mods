@@ -4,7 +4,8 @@ about: Create a report to help us improve
 title: "[BUG] "
 labels: ''
 assignees: ''
-
+body:
+  - type: markdown
   - type: checkboxes
     attributes:
       label: "Step 1. Before you submit"
