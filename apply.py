@@ -108,6 +108,16 @@ workspace = special:spotify, gapsout:30, on-startup:hide
 exec-once = spotify
 '''
 
+floatingCalc = '''
+## Floating Calculators
+windowrulev2 = float, class:^(org.kde.kcalc)
+windowrulev2 = float, class:^(org.gnome.Calculator)
+
+## Auto Size Calculators:
+windowrulev2 = size 472 473, class:^(org.kde.kcalc)
+windowrulev2 = size 360 616, class:^(org.gnome.Calculator)
+'''
+
 inputModification = '''
 ## Removes mouse accelerated
 input {
@@ -153,6 +163,11 @@ def addSpotify():
     with open(citr0modsPath+'/specialWindows.conf', 'a') as file :
         print('\n')
         file.write(spotifyClient)
+
+def addFloatingCalc():
+    with open(citr0modsPath+'/specialWindows.conf', 'a') as file :
+        print('\n')
+        file.write(floatingCalc)
 
 def rewriteStock():
     replacements = {
@@ -206,6 +221,7 @@ def rewriteHypride():
 
 addUserDiscordAndBase()
 addSpotify()
+addFloatingCalc()
 rewriteStock()
 if ALREADY_INSTALLED == False:
     appendNewInformation()
