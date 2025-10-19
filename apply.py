@@ -228,4 +228,4 @@ if ALREADY_INSTALLED == False:
 mouseAccelerationModificaiton()
 rewriteHypride()
 restartFunction()
-print(ALREADY_INSTALLED)
+# print(ALREADY_INSTALLED)  -- Used for Debuging Purposes. If asked, please uncomment this line!
