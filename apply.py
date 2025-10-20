@@ -64,6 +64,9 @@ lineNew1 = '# bind = Super, S, togglespecialworkspace, # Toggle scratchpad -- Ov
 lineOriginal2 = 'bind = Ctrl+Super, S, togglespecialworkspace, # [hidden]'
 lineNew2 = '# bind = Ctrl+Super, S, togglespecialworkspace, # [hidden] -- Overritten by citr0_mods'
 
+lineOriginal3 = 'bind = Super, D, fullscreen, 1 # Maximize'
+lineNew3 = '# bind = Super, D, fullscreen, 1 # Maximize, # [hidden] -- Overritten by citr0_mods'
+
 ## For disabling sleep
 lineOriginal3 = '''
 listener {
@@ -173,6 +176,7 @@ def rewriteStock():
     replacements = {
         lineOriginal1: lineNew1,
         lineOriginal2: lineNew2
+        lineOriginal3: lineNew3
     }
     with fileinput.input(files=keybindsConf, inplace=True) as file:
         for line in file:
