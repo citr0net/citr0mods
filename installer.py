@@ -144,12 +144,9 @@ def addUserDiscordAndBase():
     global ALREADY_INSTALLED
     if os.path.exists(citr0modsPath):
         print('citr0mods already installed, updating')
-        os.system('rm -rf '+citr0modsPath)
-
-        ALREADY_INSTALLED = True
-
+        os.system('rm -rf '+citr0modsPath+'/specialWindows.conf')
+        ALREADY_INSTALLED = True # Global warning (Future Reference)
         os.makedirs(citr0modsPath, exist_ok=True)
-    
     choice = getDiscordClientChoice()
     os.makedirs(citr0modsPath, exist_ok=True)
     with open(citr0modsPath+'/specialWindows.conf', 'w') as file:
@@ -219,7 +216,6 @@ def rewriteHypride():
             file.write(content)
             file.truncate()
 
-    
         print('Hypride Files Overwritten!')
 
 addUserDiscordAndBase()

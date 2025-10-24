@@ -11,7 +11,7 @@ A modification to [end-4 dotfiles](https://github.com/end-4/dots-hyprland/) that
 * Add Floating Calculators
 
 > [!IMPORTANT]
-> Yes, I know I used python for this. I am currently learning python and need the experience.
+> When updating, you might experience an issue where on the keybinds file, there are repeating hastags (Like # # # # # bind). This issue is known and will not be resolved, as there is no point to.
 
 ## Instalation:
 Run apply.py to install. You must be on end-4 to sucessfully install.
