@@ -83,8 +83,8 @@ lineNew3 = '''
 
 lineAppendKeybinds = '''
 ##! citr0mods
-bind = Super, S, togglespecialworkspace, spotify
-bind = Super, D, togglespecialworkspace, discord
+bind = Super, S, togglespecialworkspace, spotify # Spotify Window
+bind = Super, D, togglespecialworkspace, discord # Discord Window
 '''
 
 discordClient = '''
