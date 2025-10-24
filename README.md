@@ -28,7 +28,7 @@ If you are reinstalling, you will need to remove the previous citr0mods entry in
 > This will be under a __different__ structure than citr0mods as I need to explore new options
 
 This is a realitivly new addition that is being worked on that you, the community, can request me to add new patches to the dot files.
-This will be a seperate file due to the differences that this project has. It will be in this repository under [AdditionsInstaller.py](https://github.com/citr0net/citr0mods/blob/main/apply.py)
+This will be a seperate file due to the differences that this project has. It will be in this repository under [AdditionsInstaller.py](https://github.com/citr0net/citr0mods/blob/main/AdditionsInstaller.py)
 
 Currently being worked on:
 * Chromium Based Browser Patches
