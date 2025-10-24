@@ -8,7 +8,6 @@ username = os.getlogin()
 userHomeDir = '/home/'+username+'/'
 hyprlandDir = userHomeDir+'.config/hypr'
 hyprDir = userHomeDir+'.config/hypr'
-downloadedFilesDir = userHomeDir+'Downloads/downloadedFiles'
 keybindsConf = hyprlandDir+'/hyprland/keybinds.conf'
 keybindsCustomConf = hyprlandDir+'/custom/keybinds.conf'
 citr0modsPath = hyprlandDir+'/citr0_end4_mods'
@@ -68,14 +67,14 @@ lineOriginal3 = 'bind = Super, D, fullscreen, 1 # Maximize'
 lineNew3 = '# bind = Super, D, fullscreen, 1 # Maximize, # [hidden] -- Overritten by citr0_mods'
 
 ## For disabling sleep
-lineOriginal3 = '''
+lineOriginal4 = '''
 listener {
     timeout = 900 # 15mins
     on-timeout = $suspend_cmd
 }
 '''
 
-lineNew3 = '''
+lineNew4 = '''
 #listener {
 #    timeout = 900 # 15mins
 #    on-timeout = $suspend_cmd
@@ -175,7 +174,7 @@ def addFloatingCalc():
 def rewriteStock():
     replacements = {
         lineOriginal1: lineNew1,
-        lineOriginal2: lineNew2
+        lineOriginal2: lineNew2,
         lineOriginal3: lineNew3
     }
     with fileinput.input(files=keybindsConf, inplace=True) as file:
@@ -215,7 +214,7 @@ def rewriteHypride():
     else:
         with open(hypridleConf, 'r+') as file:
             content = file.read()
-            content = content.replace(lineOriginal3.strip(), lineNew3.strip())
+            content = content.replace(lineOriginal4.strip(), lineNew4.strip())
             file.seek(0)
             file.write(content)
             file.truncate()
