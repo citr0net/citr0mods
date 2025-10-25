@@ -1,4 +1,8 @@
 # citr0mods
+> [!CAUTION]
+> citr0mods is planned to undergo a massive overhall soon. This will be under V4, however, you will need to remove all of the modificaitons yourself to install v4
+
+
 > [!NOTE]
 > The current version is v3.3.4
 
@@ -24,8 +28,9 @@ If you are reinstalling, you will need to remove the previous citr0mods entry in
 
 # citr0mods - Additions
 > [!NOTE]
-> Additions is currently in 0.0.1a
+> Additions is currently in 0.1.0b
 > * This will be under a __different__ structure than citr0mods as I need to explore new options
+> * But both files will be under one file soon. Unforuntally, I cant work on this much as I have school.
 
 This is a realitivly new addition that is being worked on that you, the community, can request me to add new patches to the dot files.
 This will be a seperate file due to the differences that this project has. It will be in this repository under [AdditionsInstaller.py](https://github.com/citr0net/citr0mods/blob/main/AdditionsInstaller.py)
