@@ -1,6 +1,6 @@
 # citr0mods
 > [!CAUTION]
-> DO NOT USE THIS
+> * DO NOT USE THIS
 > The script is being fully re-written from the ground up for simplicity reasons
 > The script in its current form is destructive
 
