@@ -6,6 +6,10 @@
 # ------------
 # citr0net
 
+# Ideas to implement:
+# - 
+
+
 import os
 import sys
 import subprocess
@@ -65,8 +69,8 @@ def chromiumBrowserFix():
     \033[93mChromium Based Browser Crash Fix\033[00m
     If you use a chromium based browser, you might have noticed that the browser
     crashes when moving the browser to a different workspace. This patch will force
-    all chromium based browsers (the ones under the keybinds file) to use X11 instead
-    of Wayland, which fixes the issue at 0 compromise.
+    all chromium based browsers (the ones under the keybinds file) to use X11 (or XWayland) 
+    instead of Wayland, which fixes the issue at 0 compromise.
 
     Reccomended: Yes
 
@@ -74,12 +78,14 @@ def chromiumBrowserFix():
     print(chromiumKeybindsDescription)
     userInput = input('Would you like to patch the chromium based browser keybinds? (Y/n): ')
     if userInput.lower() == 'y':
-        original = 'bind = Super, W, exec, ~/.config/hypr/hyprland/scripts/launch_first_available.sh "brave" "google-chrome-stable" "zen-browser" "firefox" "brave" "chromium" "microsoft-edge-stable" "opera" "librewolf" # Browser'
-        new = '# bind = Super, W, exec, ~/.config/hypr/hyprland/scripts/launch_first_available.sh "brave" "google-chrome-stable" "zen-browser" "firefox" "brave" "chromium" "microsoft-edge-stable" "opera" "librewolf" # Browser -- Overwritten by citr0mods Additions'
+        original = 'bind = Super, W, exec, ~/.config/hypr/hyprland/scripts/launch_first_available.sh "google-chrome-stable" "zen-browser" "firefox" "brave" "chromium" "microsoft-edge-stable" "opera" "librewolf" # Browser'
+        new = '# bind = Super, W, exec, ~/.config/hypr/hyprland/scripts/launch_first_available.sh "brave" "google-chrome-stable" "zen-browser" "firefox" "brave" "chromium" "microsoft-edge-stable" "opera" "librewolf" # Browser -- Overwritten by citr0mods'
         alreadyPatched = False
+        patchedKeybind = 'bind = Super, W, exec, ~/.config/hypr/hyprland/scripts/launch_first_available.sh "brave --ozone-platform=x11" "google-chrome-stable --ozone-platform=x11" "chromium --ozone-platform=x11" "microsoft-edge-stable --ozone-platform=x11" "opera --ozone-platform=x11" # Chromium Browser Patches'
+        patched = False
 
         with open(keybindsCustomConf, 'r') as file:
-            if new in file.read():
+            if patchedKeybind in file.read():
                 print('This modification has already been installed and therefore skipped!')
                 alreadyPatched = True
 
@@ -92,7 +98,7 @@ def chromiumBrowserFix():
                         print(line, end='')
                 print('Removed existing browser keybind')
                 with open(keybindsCustomConf, 'a') as file:
-                    file.write('bind = Super, W, exec, ~/.config/hypr/hyprland/scripts/launch_first_available.sh "brave --ozone-platform=x11" "google-chrome-stable --ozone-platform=x11" "chromium --ozone-platform=x11" "microsoft-edge-stable --ozone-platform=x11" "opera --ozone-platform=x11" # Chromium Browser Patches')
+                    file.write(patchedKeybind)
                 print('Added custom keybinds')
         print('Passed chromiumBrowserFix')
     else:
