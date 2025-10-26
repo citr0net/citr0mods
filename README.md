@@ -1,8 +1,9 @@
-# citr0mods
+# fruity-end4
 > [!CAUTION]
 > * DO NOT USE THIS
 > * The script is being fully re-written from the ground up for simplicity reasons
 > * The script in its current form is destructive
+> * Yes, the script is getting its named changed in this version
 
 
 > [!NOTE]
