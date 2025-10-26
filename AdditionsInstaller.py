@@ -92,7 +92,7 @@ def chromiumBrowserFix():
             if alreadyPatched == False:
                 with fileinput.input(files=keybindsConf, inplace=True) as file:
                     for line in file:
-                        if original in line and patched == False:
+                        if line == original and patched == False:
                                 line = line.replace(original, new)
                                 patched == True
                         print(line, end='')
