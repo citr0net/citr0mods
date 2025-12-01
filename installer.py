@@ -110,14 +110,17 @@ workspace = special:spotify, gapsout:30, on-startup:hide
 exec-once = spotify
 '''
 
-floatingCalc = '''
-## Floating Calculators
+floatingApplications = '''
+## Floating Calculators:
 windowrulev2 = float, class:^(org.kde.kcalc)
 windowrulev2 = float, class:^(org.gnome.Calculator)
 
 ## Auto Size Calculators:
 windowrulev2 = size 472 473, class:^(org.kde.kcalc)
 windowrulev2 = size 360 616, class:^(org.gnome.Calculator)
+
+## Floating Clock Apps:
+windowri;ev2 = float, class:^(org.gnome)
 '''
 
 inputModification = '''

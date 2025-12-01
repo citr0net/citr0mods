@@ -7,7 +7,7 @@
 
 
 > [!NOTE]
-> The current version is v4.0.0a
+> The current version is v0.1a
 
 A modification to [end-4 dotfiles](https://github.com/end-4/dots-hyprland/) that modifies end-4 in a favorable way. The script fully handles modifying the hyprland configurations and adding entries to the keybinds screen.
 
@@ -15,7 +15,7 @@ A modification to [end-4 dotfiles](https://github.com/end-4/dots-hyprland/) that
 * Disable Mouse Acceleration
 * Add keybinds to open commonly used apps in their own workspaces (Spotify and Discord)
 * Disable sleep 
-* Add Floating Calculators
+* Add Floating Calculators and clocks
 * Patches some keybinds to mitigate issues
 
 ## Instalation:
