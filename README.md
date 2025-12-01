@@ -20,7 +20,7 @@ A modification to [end-4 dotfiles](https://github.com/end-4/dots-hyprland/) that
 > If you are not reinstalling, you will need to hit `y` for restarting!
 
 > [!NOTE]
-> Please Support an issue under end-4 dot files that will add an indicator: https://github.com/end-4/dots-hyprland/issues/2196
+> Please Support an issue under end-4 dot files that will add an indicator for the special workspaces: https://github.com/end-4/dots-hyprland/issues/2196
 
 ## Limitations
 If you are updating from a previous version (pre-v4), You will need to remove everything relating to that version, including the overwritten keybinds!
