@@ -19,56 +19,59 @@ hyprlandDir = userHomeDir+'.config/hypr'
 hyprDir = userHomeDir+'.config/hypr'
 keybindsConf = hyprlandDir+'/hyprland/keybinds.conf'
 keybindsCustomConf = hyprlandDir+'/custom/keybinds.conf'
-citr0modsPath = hyprlandDir+'/citr0_end4_mods'
+fruityEnd4Path = hyprlandDir+'/fruity_end_4'
 hypridleConf = hyprlandDir+'/hypridle.conf'
 
-citr0modsFile = citr0modsPath+'/citr0modsBase.conf'
+fruityEnd4File = fruityEnd4Path+'/fruityEnd4Base.conf'
 # Create Files
-os.system(f"mkdir -p '{citr0modsPath}'")
-os.system(f'echo > "{citr0modsFile}"')
+os.system(f"mkdir -p '{fruityEnd4Path}'")
+os.system(f'echo > "{fruityEnd4File}"')
 
 os.system('clear')
 
 def printTitle():
     print()
     print('''
-      _ _         ___                      _              _           _        _ _           
-  ___(_) |_ _ __ / _ \ _ __ ___   ___   __| |___         (_)_ __  ___| |_ __ _| | | ___ _ __ 
- / __| | __| '__| | | | '_ ` _ \ / _ \ / _` / __|        | | '_ \/ __| __/ _` | | |/ _ \ '__|
-| (__| | |_| |  | |_| | | | | | | (_) | (_| \__ \        | | | | \__ \ || (_| | | |  __/ |   
- \___|_|\__|_|   \___/|_| |_| |_|\___/ \__,_|___/        |_|_| |_|___/\__\__,_|_|_|\___|_|   
-                                                                                                                                                
+   __            _ _                              _ _  _         _           _        _ _           
+  / _|_ __ _   _(_) |_ _   _        ___ _ __   __| | || |       (_)_ __  ___| |_ __ _| | | ___ _ __ 
+ | |_| '__| | | | | __| | | |_____ / _ \\ '_ \\ / _` | || |_      | | '_ \\/ __| __/ _` | | |/ _ \\ '__|
+ |  _| |  | |_| | | |_| |_| |_____|  __/ | | | (_| |__   _|     | | | | \\__ \\ || (_| | | |  __/ |   
+ |_| |_|   \\__,_|_|\\__|\\__, |      \\___|_| |_|\\__,_|  |_|       |_|_| |_|___/\\__\\__,_|_|_|\\___|_|   
+                       |___/                                                                                                                                                                                                         
     ''')
     print()
 
 
-whatToAddToCitr0mods = [
+whatToAddTofruityEnd4 = [
     '''
-#          _ _         ___                      _     
-#      ___(_) |_ _ __ / _ \ _ __ ___   ___   __| |___ 
-#     / __| | __| '__| | | | '_ ` _ \ / _ \ / _` / __|
-#    | (__| | |_| |  | |_| | | | | | | (_) | (_| \__ \
-#     \___|_|\__|_|   \___/|_| |_| |_|\___/ \__,_|___/
-#    
-    ''',
+#   __            _ _                              _ _  _   
+#  / _|_ __ _   _(_) |_ _   _        ___ _ __   __| | || |  
+# | |_| '__| | | | | __| | | |_____ / _ \\ '_ \\ / _` | || |_ 
+# |  _| |  | |_| | | |_| |_| |_____|  __/ | | | (_| |__   _|
+# |_| |_|   \\__,_|_|\\__|\\__, |      \\___|_| |_|\\__,_|  |_|  
+#                       |___/                                                   
+#    ''',
 
 ]
 
 whatToAddToCustomKeybinds = [
-
+    '\n##! fruity-end4',
 ]
 
 def fileOverwrite(filePath, toRewrite, replacementText):
-    # FIX: Always print every line so the file is not truncated
+    # FIX: Works with multi-line blocks instead of single-line matches
     if not os.path.exists(filePath):
         return
 
-    with fileinput.input(files=[filePath], inplace=True, backup='.bak') as file:
-        for line in file:
-            if toRewrite in line:
-                # Replace only the matching part
-                line = line.replace(toRewrite, replacementText)
-            print(line, end='')
+    with open(filePath, 'r') as f:
+        content = f.read()  # FIX: read whole file so multi-line patterns can match
+
+    # FIX: Replace full block, not per-line occurrences
+    new_content = content.replace(toRewrite, replacementText)
+
+    with open(filePath, 'w') as f:
+        f.write(new_content)  # FIX: write full file back without truncation issues
+
 
 def checkEnd4():
     checkerTmp = subprocess.run(['cat', '/home/'+username+'/.config/illogical-impulse/config.json'], capture_output=True)
@@ -126,23 +129,23 @@ def chromiumBrowserFix():
 
     '''
     print(chromiumKeybindsDescription)
-    toAddToCustom = 'bind = Super, W, exec, ~/.config/hypr/hyprland/scripts/launch_first_available.sh "brave --ozone-platform=x11" "google-chrome-stable --ozone-platform=x11" "chromium --ozone-platform=x11" "microsoft-edge-stable --ozone-platform=x11" "opera --ozone-platform=x11" # Chromium Browser Patches'
+    toAddToCustom = '\nbind = Super, W, exec, ~/.config/hypr/hyprland/scripts/launch_first_available.sh "brave --ozone-platform=x11" "google-chrome-stable --ozone-platform=x11" "chromium --ozone-platform=x11" "microsoft-edge-stable --ozone-platform=x11" "opera --ozone-platform=x11" # Chromium Browser Patches\n'
     userInput = input('Would you like this patch? (Y/n): ')
     if userInput.lower() == 'n':
         print('Skipped!')
     else:
         fileOverwrite(keybindsConf, 
         'bind = Super, W, exec, ~/.config/hypr/hyprland/scripts/launch_first_available.sh "google-chrome-stable" "zen-browser" "firefox" "brave" "chromium" "microsoft-edge-stable" "opera" "librewolf" # Browser',
-        '# bind = Super, W, exec, ~/.config/hypr/hyprland/scripts/launch_first_available.sh "brave" "google-chrome-stable" "zen-browser" "firefox" "brave" "chromium" "microsoft-edge-stable" "opera" "librewolf" # Browser -- Overwritten by citr0mods')
+        '# bind = Super, W, exec, ~/.config/hypr/hyprland/scripts/launch_first_available.sh "brave" "google-chrome-stable" "zen-browser" "firefox" "brave" "chromium" "microsoft-edge-stable" "opera" "librewolf" # Browser -- Overwritten by fruityEnd4')
         print('Removed existing browser keybind')
         if not lookInFile(keybindsCustomConf, toAddToCustom):
-            whatToAddToCustomKeybinds.append(key)
+            whatToAddToCustomKeybinds.append(toAddToCustom)
         else:
             print('Keybind already detected')
 
 
 def applicationSpecialWorkspaces():
-    # From citr0mods V1-3
+    # From fruityEnd4 V1-3
     specialWorkspacesDescription = '''
     \033[93mSpecific Special Workspaces\033[00m
     If you've used the caelestia shell then you are very famillar with this one.
@@ -155,46 +158,58 @@ def applicationSpecialWorkspaces():
     - Spotify
     - Discord OR Vesktop
 
+    Issues:
+    - There is no way to tell if you opened the workspace if spotify or discord
+      gets exited
+    - Please help push this idea mainstream: 
+      Link: https://github.com/end-4/dots-hyprland/issues/2196
+
     Reccomended: Depends
     '''
     print(specialWorkspacesDescription)
     userInput = input('Would you like this patch? (y/N): ')
     if userInput.lower() == 'y':
-        print(specialWorkspacesDescription)
         conflictingKeybinds = {
-        'bind = Super, D, fullscreen, 1 # Maximize': '# Feature conflicts with Discord / Vesktop - citr0mods', # Conflicts with Discord
-        'bind = Super+Alt, S, movetoworkspacesilent, special # Send to scratchpad': '# Feature conflicts with Spotify - citr0mods', # Conflicts with spotify
-        'bind = Ctrl+Super, S, togglespecialworkspace, # [hidden]': '# Feature conflicts with Spotify - citr0mods', # Conflicts with spotify
-        'bind = Super, S, togglespecialworkspace, # Toggle scratchpad': '# Feature conflicts with Spotify - citr0mods' # Conflicts with spotify
+        'bind = Super, D, fullscreen, 1 # Maximize': '# Feature conflicts with Discord / Vesktop - fruityEnd4', # Conflicts with Discord
+        'bind = Super+Alt, S, movetoworkspacesilent, special # Send to scratchpad': '# Feature conflicts with Spotify - fruityEnd4', # Conflicts with spotify
+        'bind = Ctrl+Super, S, togglespecialworkspace, # [hidden]': '# Feature conflicts with Spotify - fruityEnd4', # Conflicts with spotify
+        'bind = Super, S, togglespecialworkspace, # Toggle scratchpad': '# Feature conflicts with Spotify - fruityEnd4' # Conflicts with spotify
         }
 
         for key, newKey in conflictingKeybinds.items():
-            if not lookInFile(keybindsCustomConf, key):
+            if lookInFile(keybindsCustomConf, key):
                 fileOverwrite(keybindsConf, key, newKey)
                 print('Rewriten Line that contains "',key+'" with "',newKey+'"')
 
         newKeybinds = [
-            'bind = Super, S, togglespecialworkspace, spotify # Spotify Window',
-            'bind = Super, D, togglespecialworkspace, discord # Discord Window'
+            '\nbind = Super, S, togglespecialworkspace, spotify # Spotify Window',
+            '\nbind = Super, D, togglespecialworkspace, discord # Discord Window'
         ]
         for key in newKeybinds:
             if not lookInFile(keybindsCustomConf, key):
                 whatToAddToCustomKeybinds.append(key)
 
         if getDiscordClientChoice() == 'Discord_clientTypeDiscord':
-            whatToAddToCitr0mods.append('''
-                ## Discord (Discord Client)
-                windowrulev2 = workspace special:discord, class:^(discord)$
-                workspace = special:discord, gapsout:30, on-startup:hide
-                exec-once = discord
+            whatToAddTofruityEnd4.append('''\n
+## Discord (Discord Client)
+windowrulev2 = workspace special:discord, class:^(discord)$
+workspace = special:discord, gapsout:30, on-startup:hide
+exec-once = discord
                 ''')
         else:
-            whatToAddToCitr0mods.append('''
-                ## Discord (Discord Client)
-                windowrulev2 = workspace special:discord, class:^(vesktop)$
-                workspace = special:discord, gapsout:30, on-startup:hide
-                exec-once = vesktop
+            whatToAddTofruityEnd4.append('''\n
+## Discord (Discord Client)
+windowrulev2 = workspace special:discord, class:^(vesktop)$
+workspace = special:discord, gapsout:30, on-startup:hide
+exec-once = vesktop
                 ''')
+
+        whatToAddTofruityEnd4.append('''\n
+## Spotify
+windowrulev2 = workspace special:spotify, class:^(Spotify)$
+workspace = special:spotify, gapsout:30, on-startup:hide
+exec-once = spotify
+        ''')
     else:
         print('Skipped!')
 
@@ -211,25 +226,26 @@ def autoSizedApplications():
 
     Reccomended: Yes
     '''
+    print(autoSizedAppsDescription)
     userInput = input('Would you like this patch (Y/n): ')
     if userInput.lower() == 'n':
         print('Skipped!')
     else:
-        newEntries = '''
-        ## Floating Calculators
-        windowrulev2 = float, class:^(org.kde.kcalc)
-        windowrulev2 = float, class:^(org.gnome.Calculator)
+        newEntries = '''\n
+## Floating Calculators
+windowrulev2 = float, class:^(org.kde.kcalc)
+windowrulev2 = float, class:^(org.gnome.Calculator)
 
-        ## Auto Size Calculators:
-        windowrulev2 = size 472 473, class:^(org.kde.kcalc)
-        windowrulev2 = size 360 616, class:^(org.gnome.Calculator)
+## Auto Size Calculators:
+windowrulev2 = size 472 473, class:^(org.kde.kcalc)
+windowrulev2 = size 360 616, class:^(org.gnome.Calculator)
 
-        # Clocks
-        windowrulev2 = float, class:^(org.gnome.clocks)
-        windowrulev2 = size 457 545, class:^(org.gnome.clocks)
+# Clocks
+windowrulev2 = float, class:^(org.gnome.clocks)
+windowrulev2 = size 457 545, class:^(org.gnome.clocks)
         '''
 
-        whatToAddToCitr0mods.append(newEntries)
+        whatToAddTofruityEnd4.append(newEntries)
 
 def autoStartSteam():
     autoStartSteamDescription = '''
@@ -242,14 +258,17 @@ def autoStartSteam():
     Reccomended: Yes
 
     '''
+    print(autoStartSteamDescription)
     userInput = input('Would you like this patch? (Y/n): ')
     if userInput.lower() == 'n':
         print('Skipped!')
     else:
-        whatToAddToCitr0mods.append('exec-once = steam -silent')
+        whatToAddTofruityEnd4.append('''\n
+## Auto Start Steam
+exec-once = steam -silent''')
 
 def mouseAcceleration():
-    autoStartSteamDescription = '''
+    mouseAccelerationDescription = '''
     \033[93mDisable Mouse Acceleration\033[00m
     Self Explanitory. Disables mouse acceleration.
     Useful for gaming.
@@ -257,16 +276,17 @@ def mouseAcceleration():
     Reccomended: Yes
 
     '''
+    print(mouseAccelerationDescription)
     userInput = input('Would you like this patch? (Y/n): ')
     if userInput.lower() == 'n':
         print('Skipped!')
     else:
-        whatToAddToCitr0mods.append('''
+        whatToAddTofruityEnd4.append('''\n
         ## Disable Mouse Acceleration
-        input {
-            sensitivity = 0
-            accel_profile = flat
-        }
+input {
+    sensitivity = 0
+    accel_profile = flat
+}
         ''')
 
 def monitorPatches():
@@ -285,40 +305,118 @@ def monitorPatches():
     Reccomended: Depends
 
     '''
+    print(monitorPatchesDescription)
     userChoice = input('Would you like this patch y/N? ')
     if userChoice.lower() == 'y':
-        result = subprocess.run(['hyprctl', 'monitors'], capture_output=True, text=True)
-        monitors = [line.split()[1].strip("'") for line in result.stdout.splitlines() if 'connected' in line]
 
-        monitorsFile = citr0modsPath+'/monitorAdditions.conf'
-        fileAppend('~/.config/hypr/hyprland.conf', 'source='+monitorsFile)
+        # --- FIX 1: Force hyprctl path & capture errors ---
+        result = subprocess.run(
+            ['/usr/bin/hyprctl', 'monitors'],
+            capture_output=True,
+            text=True
+        )
 
-        workspace_count = 1
-        with open(monitorsFile, "w") as f:
-            for i, monitor in enumerate(monitors):
-                start_workspace = workspace_count
-                end_workspace = workspace_count + 9
+        if result.returncode != 0:
+            print("ERROR: hyprctl failed to run.")
+            return
 
-                f.write(f"# --- Bind workspaces {start_workspace}-{end_workspace} (group {i+1}) to {monitor} ---\n")
-                
-                for workspace in range(start_workspace, end_workspace + 1):
-                    f.write(f"workspace = {workspace}, monitor:{monitor}, default:true\n")
+        # --- FIX 2: Proper monitor name extraction ---
+        # Hyprland output ALWAYS contains: "Monitor <name> (ID x)"
+        monitors = []
+        for line in result.stdout.splitlines():
+            if line.startswith("Monitor"):
+                # Example: "Monitor eDP-1 (ID 0):"
+                parts = line.split()
+                if len(parts) >= 2:
+                    monitors.append(parts[1])
 
-                workspace_count = end_workspace + 1
+        if not monitors:
+            print("ERROR: No monitors detected.")
+            return
+
+        # --- FIX 3: Ensure folder exists ---
+        os.makedirs(fruityEnd4Path, exist_ok=True)
+
+        monitorsFile = fruityEnd4Path + '/monitorAdditions.conf'
+
+        # --- FIX 4: Ensure hyprland.conf gets the include line ---
+        fileAppend(
+            userHomeDir + '/.config/hypr/hyprland.conf',
+            'source=' + monitorsFile
+        )
+
+        # --- FIX 5: Guaranteed file write ---
+        try:
+            with open(monitorsFile, "w") as f:
+                workspace_count = 1
+                for i, monitor in enumerate(monitors):
+                    start_workspace = workspace_count
+                    end_workspace = workspace_count + 9
+
+                    f.write(
+                        f"# --- Bind workspaces {start_workspace}-{end_workspace} "
+                        f"(group {i+1}) to {monitor} ---\n"
+                    )
+
+                    for workspace in range(start_workspace, end_workspace + 1):
+                        f.write(
+                            f"workspace = {workspace}, monitor:{monitor}, default:true\n"
+                        )
+
+                    workspace_count = end_workspace + 1
+        except Exception as e:
+            print("ERROR: Failed to write monitorAdditions.conf:", e)
+            return
+
+
+
+def disableSleep():
+    description = '''
+    \033[93mDisable Sleep\033[00m
+    Disables the automanic sleep feature, useful for desktops.
+    Do not enable this on laptops!
+
+    Requires:
+    - Desktop
+
+    Issues:
+    - If you have ran this before, don't run it again.
+      It will break things
+    - Disabling this on laptops will have lower battery life!
+
+    Reccomended: Depends
+
+    '''
+    print(description)
+    userChoice = input('Would you like to apply this patch y/N: ')
+    if userChoice.lower() == 'y':
+        original = '''
+listener {
+    timeout = 900 # 15mins
+    on-timeout = $suspend_cmd
+}
+'''
+        new = '''
+#listener {
+#    timeout = 900 # 15mins
+#    on-timeout = $suspend_cmd
+#}
+'''
+        fileOverwrite(hypridleConf, original, new)
 
 def addNewKeybinds():
     for key in whatToAddToCustomKeybinds:
         fileAppend(keybindsCustomConf, key)
 
-    for key in whatToAddToCitr0mods:
-        fileAppend(citr0modsFile, key)
+    for key in whatToAddTofruityEnd4:
+        fileAppend(fruityEnd4File, key)
 
 printTitle()
 checkEnd4()
 
-entryAdditions = '''
-# citr0mods
-source=citr0_end4_mods/citr0modsBase.conf
+entryAdditions = '''\n
+# fruityEnd4
+source=fruity_end_4/fruityEnd4Base.conf
 '''
 fileAppend(userHomeDir+'.config/hypr/hyprland.conf', entryAdditions)
 
@@ -328,6 +426,15 @@ autoSizedApplications()
 autoStartSteam()
 mouseAcceleration()
 monitorPatches()
+disableSleep()
 
 # Write to Disk
 addNewKeybinds()
+
+print('Your prefrences have been writen to disk!')
+os.system('clear')
+printTitle()
+print('\nTo apply your changes, it is best to restart.')
+choiceToRestart = input('Would you like to do that now? y/N: ')
+if choiceToRestart == 'y':
+    os.system('pkexec shutdown -r now')
