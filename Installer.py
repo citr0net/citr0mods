@@ -384,7 +384,7 @@ def disableSleep():
       It will break things
     - Disabling this on laptops will have lower battery life!
 
-    Reccomended: Depends
+    Reccomended: No
 
     '''
     print(description)
