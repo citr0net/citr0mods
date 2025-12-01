@@ -1,13 +1,7 @@
 # fruity-end4
-> [!CAUTION]
-> * DO NOT USE THIS
-> * The script is being fully re-written from the ground up for simplicity reasons
-> * The script in its current form is destructive
-> * Yes, the script is getting its named changed in this version
-
 
 > [!NOTE]
-> The current version is v0.1a
+> The current version is v4.0
 
 A modification to [end-4 dotfiles](https://github.com/end-4/dots-hyprland/) that modifies end-4 in a favorable way. The script fully handles modifying the hyprland configurations and adding entries to the keybinds screen.
 
@@ -17,9 +11,10 @@ A modification to [end-4 dotfiles](https://github.com/end-4/dots-hyprland/) that
 * Disable sleep 
 * Add Floating Calculators and clocks
 * Patches some keybinds to mitigate issues
+* Fix multiple monitors
 
 ## Instalation:
-DO NOT INSTALL THIS!!!
+* Run Installer.py
 
 > [!TIP]
 > If you are not reinstalling, you will need to hit `y` for restarting!
