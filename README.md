@@ -1,5 +1,8 @@
 # fruity-end4
 
+> [!WARNING]
+> DO NOT INSTALL THIS ATM, it is breaking things.
+
 > [!NOTE]
 > The current version is v4.0
 
