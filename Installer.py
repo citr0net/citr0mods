@@ -145,7 +145,7 @@ def chromiumBrowserFix():
 
 
 def applicationSpecialWorkspaces():
-    # From fruityEnd4 V1-3
+    # From citr0mods V1-3
     specialWorkspacesDescription = '''
     \033[93mSpecific Special Workspaces\033[00m
     If you've used the caelestia shell then you are very famillar with this one.
@@ -182,8 +182,8 @@ def applicationSpecialWorkspaces():
                 print('Rewriten Line that contains "',key+'" with "',newKey+'"')
 
         newKeybinds = [
-            '\nbind = Super, S, togglespecialworkspace, spotify # Spotify Window',
-            '\nbind = Super, D, togglespecialworkspace, discord # Discord Window'
+            "\nbind = Super, S, togglespecialworkspace, spotify # Spotify Window",
+            "\nbind = Super, D, togglespecialworkspace, discord # Discord Window"
         ]
         for key in newKeybinds:
             if not lookInFile(keybindsCustomConf, key):
@@ -265,7 +265,7 @@ def autoStartSteam():
     else:
         whatToAddTofruityEnd4.append('''\n
 ## Auto Start Steam
-exec-once = steam -silent''')
+exec-once = wait 5 && steam -silent''')
 
 def mouseAcceleration():
     mouseAccelerationDescription = '''
